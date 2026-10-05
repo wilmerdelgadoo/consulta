@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sistema Comercial Móvil</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: #f1f5f9; color: #1e293b; display: flex; justify-content: center; padding: 12px; min-height: 100vh; }
+    .app-container { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 14px; }
+    .header { background-color: #0f172a; color: #ffffff; border-radius: 14px; padding: 16px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .header h1 { font-size: 1.15rem; font-weight: 700; letter-spacing: 0.5px; }
+    .header p { font-size: 0.78rem; color: #94a3b8; margin-top: 4px; }
+    .selector-card { background: #ffffff; border-radius: 14px; padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+    .selector-card label { display: block; font-size: 0.75rem; font-weight: 700; color: #475569; margin-bottom: 8px; text-transform: uppercase; }
+    .custom-select { width: 100%; padding: 14px 12px; font-size: 0.95rem; font-weight: 600; color: #0f172a; background-color: #f8fafc; border: 2px solid #cbd5e1; border-radius: 10px; outline: none; appearance: none; -webkit-appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23475569%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 14px center; background-size: 12px auto; }
+    .card { background: #ffffff; border-radius: 14px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 10px; }
+    .card-title { font-size: 0.8rem; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #f1f5f9; padding-bottom: 6px; }
+    .balance-box { display: flex; flex-direction: column; gap: 10px; text-align: center; padding: 8px 0; }
+    .balance-label { font-size: 0.8rem; color: #64748b; font-weight: 600; }
+    .balance-total { font-size: 1.85rem; font-weight: 800; color: #d97706; line-height: 1.1; }
+    .balance-overdue { font-size: 1.3rem; font-weight: 800; color: #dc2626; }
+    .divider { height: 1px; background: #f1f5f9; width: 100%; margin: 2px 0; }
+    .history-item { display: flex; flex-direction: column; gap: 3px; padding: 8px 0; border-bottom: 1px solid #f8fafc; }
+    .history-item:last-child { border-bottom: none; }
+    .history-header { display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; color: #334155; }
+    .history-sub { font-size: 0.75rem; color: #64748b; }
+    .history-amount { font-size: 0.82rem; font-weight: 700; color: #0f172a; text-align: right; }
+    .empty-state { font-size: 0.78rem; color: #94a3b8; font-style: italic; text-align: center; padding: 6px 0; }
+    .footer { text-align: center; font-size: 0.72rem; color: #94a3b8; padding: 10px 0; }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="header">
+      <h1>CONTROL COMERCIAL</h1>
+      <p>Actualizado: 05/10/2026 • 07:00 PM</p>
+    </div>
+    <div class="selector-card">
+      <label for="clienteSelect">Seleccionar Cliente</label>
+      <select id="clienteSelect" class="custom-select" onchange="cambiarCliente(this.value)">
+<option value="QUIMICOLORCA">QUIMICOLOR, C.A.</option>
+<option value="SOLINTEXDEVENEZUELASA">SOLINTEX DE VENEZUELA, S.A.</option>
+<option value="FLORIPAINTCA">FLORIPAINT, C.A</option>
+<option value="DISTRIBUIDORACOLOREALDELCENTROCA">DISTRIBUIDORA COLOREAL DEL CENTRO, C.A.</option>
+      </select>
+    </div>
+    <div class="card">
+      <div class="card-title">Estado de Cuenta</div>
+      <div class="balance-box">
+        <div>
+          <div class="balance-label">Deuda Total Exigible</div>
+          <div id="lblTotal" class="balance-total">$ 0.00</div>
+        </div>
+        <div class="divider"></div>
+        <div>
+          <div class="balance-label">Saldo Vencido (> 45 Días)</div>
+          <div id="lblVencido" class="balance-overdue">$ 0.00</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Últimos 3 Despachos</div>
+      <div id="contDespachos"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Últimos 3 Pagos</div>
+      <div id="contPagos"></div>
+    </div>
+    <div class="footer">Sistema Central • wadodesigns</div>
+  </div>
+  <script>
+const DB = {
+  "QUIMICOLORCA": {
+    total: 0,
+    vencido: 0,
+    despachos: [
+
+    ],
+    pagos: [
+
+    ]
+  },
+  "SOLINTEXDEVENEZUELASA": {
+    total: 26070.52,
+    vencido: 26070.52,
+    despachos: [
+      { fecha: "25/02/2025", nota: "49", prod: "GALÓN PP (LITOGRAFIADO)", monto: 5416.32 },
+      { fecha: "04/12/2024", nota: "441", prod: "GALÓN PP (LITOGRAFIADO)", monto: 6019.2 },
+      { fecha: "01/11/2024", nota: "", prod: "GALÓN PP (LITOGRAFIADO)", monto: 4275 }
+    ],
+    pagos: [
+
+    ]
+  },
+  "FLORIPAINTCA": {
+    total: 28058.34,
+    vencido: 2751.66,
+    despachos: [
+      { fecha: "24/09/2026", nota: "7701", prod: "CUARTO GAL PP", monto: 2856 },
+      { fecha: "16/09/2026", nota: "7672", prod: "CUARTO GAL PP", monto: 2205 },
+      { fecha: "16/09/2026", nota: "7672", prod: "GALÓN PP", monto: 665.28 }
+    ],
+    pagos: [
+      { fecha: "30/09/2026", metodo: "Transferencia USD", ref: "12061456819", monto: 12500 },
+      { fecha: "25/09/2026", metodo: "Binance", ref: "0", monto: 11725 },
+      { fecha: "10/09/2026", metodo: "Transferencia USD", ref: "0", monto: 15000 }
+    ]
+  },
+  "DISTRIBUIDORACOLOREALDELCENTROCA": {
+    total: 30173.03,
+    vencido: 6572.15,
+    despachos: [
+      { fecha: "15/09/2026", nota: "7658", prod: "CUARTO GAL PP", monto: 1470 },
+      { fecha: "15/09/2026", nota: "7658", prod: "GALÓN PP", monto: 5322.24 },
+      { fecha: "04/09/2026", nota: "7604", prod: "CUARTO GAL PP", monto: 1428 }
+    ],
+    pagos: [
+      { fecha: "03/09/2026", metodo: "Transferencia Bs", ref: "0", monto: 7318.08 },
+      { fecha: "21/08/2026", metodo: "Transferencia Bs", ref: "0", monto: 7318.08 },
+      { fecha: "31/07/2026", metodo: "Transferencia Bs", ref: "0", monto: 7318.08 }
+    ]
+  },
+};
+    function fmt(val) { return '$ ' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+    function cambiarCliente(cliKey) {
+      const data = DB[cliKey] || { total: 0, vencido: 0, despachos: [], pagos: [] };
+      document.getElementById('lblTotal').innerText = fmt(data.total);
+      document.getElementById('lblVencido').innerText = fmt(data.vencido);
+      const dCont = document.getElementById('contDespachos');
+      dCont.innerHTML = (!data.despachos || data.despachos.length === 0) ? '<div class="empty-state">Sin despachos registrados</div>' : data.despachos.map(d => `<div class="history-item"><div class="history-header"><span>&#128197; ${d.fecha} \vert{} Nota #${d.nota}</span><span class="history-amount">${fmt(d.monto)}</span></div><div class="history-sub">${d.prod}</div></div>`).join('');
+      const pCont = document.getElementById('contPagos');
+      pCont.innerHTML = (!data.pagos || data.pagos.length === 0) ? '<div class="empty-state">Sin pagos registrados</div>' : data.pagos.map(p => `<div class="history-item"><div class="history-header"><span>&#128179; ${p.fecha} \vert{} Ref:${p.ref}</span><span class="history-amount">${fmt(p.monto)}</span></div><div class="history-sub">${p.metodo}</div></div>`).join('');
+    }
+    window.onload = function() { const sel = document.getElementById('clienteSelect'); if(sel && sel.value) cambiarCliente(sel.value); };
+  </script>
+</body>
+</html>
