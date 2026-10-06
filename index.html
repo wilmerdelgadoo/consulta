@@ -54,7 +54,7 @@
   <div id="app-content" class="app-container" style="display: none;">
     <div class="header">
       <h1>CONTROL COMERCIAL</h1>
-      <p>Actualizado: 06/10/2026 • 08:30 AM</p>
+      <p>Actualizado: 06/10/2026 • 08:52 AM</p>
     </div>
     <div class="selector-card">
       <label for="clienteSelect">Seleccionar Cliente</label>
@@ -63,6 +63,7 @@
 <option value="SOLINTEXDEVENEZUELASA">SOLINTEX DE VENEZUELA, S.A.</option>
 <option value="FLORIPAINTCA">FLORIPAINT, C.A</option>
 <option value="DISTRIBUIDORACOLOREALDELCENTROCA">DISTRIBUIDORA COLOREAL DEL CENTRO, C.A.</option>
+<option value="PINTURASCOLVENTSCA">PINTURAS COLVENTS, C.A.</option>
       </select>
     </div>
     <div class="card">
@@ -139,6 +140,20 @@ const DB = {
       { fecha: "03/09/2026", metodo: "Transferencia Bs", ref: "0", monto: 7318.08 },
       { fecha: "21/08/2026", metodo: "Transferencia Bs", ref: "0", monto: 7318.08 },
       { fecha: "31/07/2026", metodo: "Transferencia Bs", ref: "0", monto: 7318.08 }
+    ]
+  },
+  "PINTURASCOLVENTSCA": {
+    total: 14350.94,
+    vencido: 8181.44,
+    despachos: [
+      { fecha: "27/08/2026", nota: "7561", prod: "CUARTO GAL PP", monto: 2295 },
+      { fecha: "27/08/2026", nota: "7561", prod: "GALÓN PP", monto: 3874.5 },
+      { fecha: "21/08/2026", nota: "7529", prod: "CUARTO GAL PP", monto: 1428 }
+    ],
+    pagos: [
+      { fecha: "01/09/2026", metodo: "CLM Metalfibras", ref: "jqg4kss33", monto: 229 },
+      { fecha: "24/09/2026", metodo: "CLM Metalfibras", ref: "gbl07bi3g", monto: 100 },
+      { fecha: "24/09/2026", metodo: "CLM Metalfibras", ref: "mwm1kdar9", monto: 259.2 }
     ]
   },
 };
