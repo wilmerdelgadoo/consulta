@@ -54,7 +54,7 @@
   <div id="app-content" class="app-container" style="display: none;">
     <div class="header">
       <h1>CONTROL COMERCIAL</h1>
-      <p>Actualizado: 06/10/2026 • 09:44 AM</p>
+      <p>Actualizado: 06/10/2026 • 01:33 PM</p>
     </div>
     <div class="selector-card">
       <label for="clienteSelect">Seleccionar Cliente</label>
@@ -66,9 +66,8 @@
 <option value="PINTURASCOLVENTSCA">PINTURAS COLVENTS, C.A.</option>
 <option value="PINTURASCOINPICACA">PINTURAS COINPICA, C.A</option>
 <option value="PINTURASPINTUGAMACA">PINTURAS PINTUGAMA, C.A.</option>
-<option value="PINTURASCOINPICA">PINTURAS COINPICA</option>
-<option value="QUIMINTERCA">QUIMINTER, C.A.</option>
 <option value="CAVENEZOLANADEPINTURAS">C.A. VENEZOLANA DE PINTURAS</option>
+<option value="QUIMINTERCA">QUIMINTER, C.A.</option>
 <option value="REPRESENTANTESEINDUSTRIALESCONSORCIADOSCA(REINCO)">REPRESENTANTES E INDUSTRIALES CONSORCIADOS C.A. (REINCO)</option>
 <option value="ARAPAINTINGCA">ARA PAINTING, C.A.</option>
 <option value="PINTURASEVERESTCA">PINTURAS EVEREST, C.A.</option>
@@ -236,13 +235,17 @@ const DB = {
     ]
   },
   "PINTURASCOINPICACA": {
-    total: 5352.48,
+    total: 0,
     vencido: 0,
     despachos: [
-      { fecha: "14/09/2026", nota: "7656", prod: "GALÓN PP", monto: 5352.48 }
+      { fecha: "16/09/2026", nota: "7661", prod: "GALÓN PP", monto: 5322.24 },
+      { fecha: "14/09/2026", nota: "7656", prod: "GALÓN PP", monto: 5352.48 },
+      { fecha: "01/09/2026", nota: "7581", prod: "GALÓN PP", monto: 5352.48 }
     ],
     pagos: [
-
+      { fecha: "25/09/2026", metodo: "Binance", ref: "0", monto: 10704.96 },
+      { fecha: "03/09/2026", metodo: "Transferencia Bs", ref: "13393346919", monto: 2207.81 },
+      { fecha: "03/09/2026", metodo: "Transferencia Bs", ref: "13393345716", monto: 2043.97 }
     ]
   },
   "PINTURASPINTUGAMACA": {
@@ -259,18 +262,18 @@ const DB = {
       { fecha: "12/08/2026", metodo: "Binance", ref: "-", monto: 5000 }
     ]
   },
-  "PINTURASCOINPICA": {
-    total: 15815.52,
-    vencido: 0,
+  "CAVENEZOLANADEPINTURAS": {
+    total: 74224.88,
+    vencido: 74224.88,
     despachos: [
-      { fecha: "16/09/2026", nota: "7661", prod: "GALÓN PP", monto: 5322.24 },
-      { fecha: "01/09/2026", nota: "7581", prod: "GALÓN PP", monto: 5352.48 },
-      { fecha: "27/08/2026", nota: "7554", prod: "GALÓN PP", monto: 5322.24 }
+      { fecha: "29/06/2026", nota: "7285", prod: "GALÓN PP", monto: 6582.4 },
+      { fecha: "29/06/2026", nota: "7284", prod: "GALÓN PP", monto: 6582.4 },
+      { fecha: "26/06/2026", nota: "7277", prod: "GALÓN PP", monto: 6582.4 }
     ],
     pagos: [
-      { fecha: "25/09/2026", metodo: "Binance", ref: "-", monto: 10704.96 },
-      { fecha: "08/06/2026", metodo: "Transferencia Bs", ref: "61594910091", monto: 0 },
-      { fecha: "08/06/2026", metodo: "Transferencia Bs", ref: "61594903716", monto: 0 }
+      { fecha: "27/08/2026", metodo: "Transferencia USD", ref: "0827202600008705557", monto: 54564 },
+      { fecha: "22/07/2026", metodo: "Transferencia USD", ref: "0722202600008535466", monto: 66218.4 },
+      { fecha: "19/06/2026", metodo: "Transferencia USD", ref: "0619202600008390842", monto: 46761 }
     ]
   },
   "QUIMINTERCA": {
@@ -280,18 +283,6 @@ const DB = {
       { fecha: "04/09/2026", nota: "7605", prod: "CUARTO GAL PP", monto: 785.4 },
       { fecha: "04/09/2026", nota: "7605", prod: "GALÓN PP", monto: 665.28 },
       { fecha: "31/08/2026", nota: "7575", prod: "CUARTO GAL PP", monto: 714 }
-    ],
-    pagos: [
-
-    ]
-  },
-  "CAVENEZOLANADEPINTURAS": {
-    total: 1134856.5,
-    vencido: 1134856.5,
-    despachos: [
-      { fecha: "29/06/2026", nota: "7285", prod: "GALÓN PP", monto: 6582.4 },
-      { fecha: "29/06/2026", nota: "7284", prod: "GALÓN PP", monto: 6582.4 },
-      { fecha: "26/06/2026", nota: "7277", prod: "GALÓN PP", monto: 6582.4 }
     ],
     pagos: [
 
